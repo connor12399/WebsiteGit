@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LocalTheatreCompany.Models.Blog>
+
+@{
+    ViewBag.Title = "Browse Blogs";
+}
+
+<br />
+<hr />
+@foreach (var item in ViewBag.Categories)
+{
+    <b>@item.CategoryName</b>
+}
+<br />
+<hr />
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find Post by Category: @Html.TextBox("SearchString")
+
+        <input type="submit" value="Search" />
+    </p>
+}
+<br />
+<hr />
+
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        <button>@Html.ActionLink("Request Role", "RequestARole", "Home")</button> 
+
+    if (User.IsInRole("Writer") || User.IsInRole("Admin"))
+    {
+        <button>@Html.ActionLink("Blog Management", "Index", "Staff")</button>
+        <button>@Html.ActionLink("Request a Style", "RequestAStyle", "Staff")</button>
+    }
+    }
+    else
+    {
+    @Html.ActionLink("Blog Management", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    }
+</p>
+
+
+@foreach (var item in Model)
+{
+    <div class="post-preview">
+        <a href="@Url.Action("Details", null, new { id = item.BlogId, controller = "Home" })">
+            <h2 class="post-title">@item.Title</h2>
+        </a>
+        <p class="post-meta">
+            Posted by
+            <a href="#!">@item.Staff.FirstName</a>
+            on @item.DatePosted Category <b> @item.Category.CategoryName </b>
+        </p>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+}
+

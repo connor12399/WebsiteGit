@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "AdminMenu";
+}
+
+<h2>Admin Menu</h2>
+
+<li>@Html.ActionLink("User Management", "UserManagement", "Admin")</li>
+<li>@Html.ActionLink("Category Management", "CategoryList", "Admin")</li>
+
+@*  If the user is an admin then they they will be shown a list of all the comments that need approved *@
+@if (User.IsInRole("Admin"))
+{
+    <li>@Html.ActionLink("Admin Inbox", "AdminInbox", "Admin")</li>
+}
+
+@*Only admins and super admins can access controller so if an admin isn't using
+    this method then it must be a super admin*@
+else
+{
+    <li>@Html.ActionLink("Super-Admin Request Inbox", "SuperAdminInbox", "Admin")</li>
+    <li>@Html.ActionLink("Super-Admin Style Inbox", "SuperAdminInboxStyle", "Admin")</li>
+}
+
+
+
+

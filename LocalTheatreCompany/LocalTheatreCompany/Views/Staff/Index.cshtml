@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LocalTheatreCompany.Models.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Blog Management</h2>
+
+<p>
+    @Html.ActionLink("Create Blog", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+
+        @if (User.IsInRole("Admin"))
+        {
+        <th>
+            @Html.DisplayNameFor(model => model.Staff.FirstName)
+        </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePosted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.FirstName)
+            </td>
+        }
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatePosted)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BlogId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BlogId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BlogId })
+
+            @*@if (User.IsInRole("Admin") && item.Approval == false)
+            {
+                @Html.ActionLink("Approve", "Approve", new { id = item.BlogId })
+            }*@
+        </td>
+    </tr>
+}
+
+
+</table>

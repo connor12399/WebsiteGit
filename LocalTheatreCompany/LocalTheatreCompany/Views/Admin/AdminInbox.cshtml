@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LocalTheatreCompany.Models.Comment>
+
+@{
+    ViewBag.Title = "Admin Inbox";
+}
+
+<h2>Admin Inbox</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCommented)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCommented)
+        </td>
+        <td>
+            @Html.ActionLink("Approve", "Approve", new { commentId = item.CommentId }) |
+            @Html.ActionLink("Delete", "Delete", new { commentId = item.CommentId })
+        </td>
+    </tr>
+}
+
+
+</table>

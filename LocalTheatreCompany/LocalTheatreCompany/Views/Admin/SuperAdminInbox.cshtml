@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LocalTheatreCompany.Models.RoleRequest>
+
+@{
+    ViewBag.Title = "Super Admin Inbox Requests";
+}
+
+<h2>Super Admin Inbox</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DesiredRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.DesiredRole)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Reason)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RequestTime)
+    </td>
+    <td>
+
+        @Html.ActionLink("Promote", "Promote", new { roleRequestId = item.RoleRequestId }) |
+        
+        @Html.ActionLink("Delete Request", "DeleteRoleRequest", new { roleRequestId = item.RoleRequestId })
+   
+    </td>
+</tr>
+}
+
+</table>

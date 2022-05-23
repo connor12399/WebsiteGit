@@ -1,0 +1,38 @@
+﻿@model IEnumerable<LocalTheatreCompany.Models.Blog>
+
+@{
+    ViewBag.Title = "Announcements";
+}
+<h2>Index</h2>
+
+
+@foreach (var item in Model)
+{
+    <div class="post-preview">
+        <a href="@Url.Action("Details", null, new { id = item.BlogId, controller = "Home" }, Request.Url.Scheme)">
+            <h2 class="post-title">@item.Title</h2>
+        </a>
+        <p class="post-meta">
+            Posted by
+            <a href="#!">@item.Staff.FirstName</a>
+            on @item.DatePosted
+        </p>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+    @*@Html.DisplayFor(modelItem => item.Category.CategoryName)
+
+
+        @Html.DisplayFor(modelItem => item.Staff.FirstName)
+
+
+        @Html.DisplayFor(modelItem => item.Title)
+
+
+
+        @Html.DisplayFor(modelItem => item.DatePosted)
+
+            @Html.ActionLink("Details", "Details", new { id = item.BlogId })*@
+
+}
+
